@@ -1,0 +1,115 @@
+
+  <!-- Put your content here -->
+
+<ion-content class="homeBackground">
+
+  <ion-grid>
+    <ion-row>
+      <!-- <ion-col no-padding></ion-col>     -->
+      <ion-col col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2  no-padding>
+
+
+  <!-- ALERT SEGMENT -->
+  <ion-card style="height: 100% !important; width: 100%" class="homeCard" no-margin>
+    
+    <!-- ALERT SEGMENT HEADER -->
+
+    <div class="farmSegment" padding>
+      <button style="float: right" color="dark" ion-button clear (click)="dismiss()" icon-only>
+        <ion-icon name="md-close"></ion-icon> 
+      </button>
+      <div text-left style="float: left; width: 87%;">
+        <h1 style="font-family: georgia; margin-top: 10px;  color: white" text-center>{{alert.unit_name}} {{alert.hdatetime}}</h1>
+      </div>
+         
+      
+
+      <ion-segment mode="md" [(ngModel)]="alertDashboard" color="light">
+        <ion-segment-button value="video" [hidden]="!this.VideoOrPic">
+          Video
+        </ion-segment-button>
+        <ion-segment-button value="pic" [hidden]="this.VideoOrPic">
+          Picture
+        </ion-segment-button>
+        <!-- <ion-segment-button value="command">
+          Commands
+        </ion-segment-button> -->
+      </ion-segment>
+    </div>
+
+    <!-- ALERT SEGMENT CONTENT --> 
+    <div [ngSwitch]="alertDashboard">
+      <!-- 480px --> 
+    <!-- <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 350px" no-padding no-margin> -->
+      <!-- VIDEO SEGMENT -->
+      <div *ngSwitchCase="'video'" [hidden]="!this.VideoOrPic">
+
+        <!-- <ion-card class="cardtransparent" padding> -->
+<!-- 
+  vg-width="videojs.options.width" vg-height="videojs.options.height" 
+  -->
+        <div class="videogular-container" style="margin-top: 20px;width=200px">
+          <!-- vg-width="300px" vg-height="200px" vg-responsive="false"   --> 
+            <vg-player vg-responsive="false" vg-width="300px" vg-height="200px"   vg-theme="config.theme.url">
+              <video vg-src="videojs.options.sources" preload='metadata' [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+                  <source src="https://www.dev-x.co.za/Projects/PhoenixInstruments/BirdScanner/upload_pi/{{alert.filename}}" type="video/mp4">
+              </video>
+            </vg-player>
+        </div> 
+
+        <!-- <ion-card-content> -->
+        
+          <div style="margin-bottom: 15px" text-center>
+
+            <ion-item no-lines no-margin no-padding style="width: 90%; margin: 0 auto; border-bottom: none !important; padding-right: none !important">
+              <!-- <ion-label stacked>Comments</ion-label> -->
+              <ion-textarea  class="textareaStyle" [(ngModel)]="alert.comments" no-padding no-margin placeholder="Comments..."></ion-textarea>
+            </ion-item>
+
+            <button ion-button style="background-color: #32CD32; margin-top: 10px" icon-start (click)="updateAlertStatus('Accepted', alert)">
+              <ion-icon name="md-checkmark"></ion-icon>
+              Accept
+            </button>
+            <button ion-button style="background-color: orange; margin-top: 10px" icon-start (click)="updateAlertStatus('Investigate', alert)">
+              <ion-icon name="md-eye"></ion-icon>
+              Investigate
+            </button>
+            <button ion-button color="danger" style="margin-top: 10px" icon-start (click)="updateAlertStatus('Rejected', alert)">
+              <ion-icon name="md-close" ></ion-icon>
+              Reject
+            </button>
+          </div>
+         
+
+      </div>
+
+      <!-- PICTURE SEGMENT-->
+
+      <div *ngSwitchCase="'pic'" [hidden]="this.VideoOrPic">
+        <ion-grid no-margin no-padding>
+          <ion-row>
+            <ion-col col-12 col-lg-6 offset-lg-3>
+              <ion-card style="width: 100% !important; padding: 5px">
+                <img  width="80%" height="80%" src="https://www.dev-x.co.za/Projects/PhoenixInstruments/BirdScanner/upload_pi/{{alert.filename}}">
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        
+      </div>
+      
+      <!-- COMMAND SEGMENT -->
+      <div *ngSwitchCase="'command'">
+          
+      </div>
+    <!-- </ion-scroll> -->
+    </div>
+
+  </ion-card>
+
+      </ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-content>
+
+<!-- <ion-footer text-center style="background-color: #455A64; height: 70px; padding: 10px; font-weight: bold; font-size: 30px;"></ion-footer> -->

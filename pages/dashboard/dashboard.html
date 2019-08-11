@@ -1,0 +1,95 @@
+<ion-header >
+  <ion-navbar  hideBackButton="true" color="light">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title style="color: red; font-family: 'Fredericka the Great', cursive;"><em style="padding-bottom: 12px">Bird Monitor</em></ion-title>
+    <ion-buttons end>
+      <button color="dark" ion-button icon-only (click)="goToLoginPage()">
+        <ion-icon name="ios-contact"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- <span style="margin-left: 50%">Mkdljf</span> -->
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="homeBackground" padding>
+
+<!-- <ion-slides style="max-width: 880px; height: 250px; margin: 0 auto" pager autoplay=3000 effect="fade" speed=2000 loop=true>
+  <ion-slide> -->
+    <!-- <ion-card style="width: 95%; margin: 0 auto; height: 200px; background-color: rgba(250,250,250,0.1); border-radius: 30px;" padding> -->
+      <!-- <h2 style="font-family: 'Slabo 27px', serif; font-size: 40px; font-weight: regular 400; color: rgb(222, 198, 233)" text-center>The Bird Eye App</h2> -->
+      <!-- <h2 style="font-family: 'Fredericka the Great', cursive; font-size: 25px; color: rgb(222, 198, 233)" text-center>Fleet Statistics</h2> -->
+      <!-- <hr style="height: 0.5px; background-color: rgb(222, 198, 233)"> -->
+    <!-- </ion-card> -->
+  <!-- </ion-slide>
+</ion-slides> -->
+
+    <!-- <ion-item no-lines style="border: none !important">  
+      <ion-avatar no-lines>
+        <img no-lines style="border: 8px solid beige; height: 200px; width: 200px; margin: 20px auto" src="https://cdn.pixabay.com/photo/2016/11/23/18/27/hummingbird-1854225__340.jpg"/>
+      </ion-avatar>
+    </ion-item> -->
+    <div style="margin: 50px auto; width: 200px; height: 200px; border-radius: 50%; background-color: rgba(0,150,0,0.8); border: 8px solid lightgray">
+      <img style="width: 100%; margin: 0px 5px" src="https://www.dev-x.co.za/Projects/PhoenixInstruments/BirdScanner/appImages/Bird-Transparent.png"/>
+    </div>
+
+<ion-grid style="margin-top: 30px">
+  <ion-row>
+    <ion-col col-10 col-sm-10  col-md-8 col-lg-4 offset-1 offset-sm-1 offset-md-2 offset-lg-4>
+      <ion-grid>
+        <ion-row>
+          <!-- <ion-col>
+          </ion-col> -->
+          <ion-col col-4  text-center (click)="goToPage(1)">
+            <ion-card class="ypBtns" no-margin>
+              <ion-icon name="ios-wifi" style="zoom:3.0;"></ion-icon>
+              <div class="ypTags">Alerts</div>
+            </ion-card>
+          </ion-col>
+          <ion-col col-4 text-center (click)="goToPage(2)">
+            <ion-card class="ypBtns" no-margin>
+              <ion-icon name="ios-search" style="zoom:3.0;"></ion-icon>
+              <div class="ypTags">Monitors</div>
+            </ion-card>
+          </ion-col>
+          <ion-col col-4 text-center>
+            <ion-card class="ypBtns" no-margin (click)="goToPage(3)">
+              <ion-icon name="images" style="zoom:3.0;"></ion-icon>
+              <div class="ypTags">Requests</div>
+            </ion-card>
+          </ion-col>
+          <!-- <ion-col></ion-col> -->
+        </ion-row>
+        <ion-row>
+          <!-- <ion-col></ion-col> -->
+          <ion-col col-4 offset-4 text-center (click)="goToPage(4)">
+            <ion-card class="ypBtns" no-margin>
+              <ion-icon name="md-globe" style="zoom:3.0;"></ion-icon>
+              <div class="ypTags">Maps</div>
+            </ion-card>
+          </ion-col>
+
+          <!-- <ion-col col-4 text-center>
+            <ion-card class="ypBtns" no-margin>
+              <ion-icon name="clipboard"  style="zoom:3.0;"></ion-icon>
+              <div class="ypTags">Reports</div>
+            </ion-card>
+          </ion-col>
+          
+          <ion-col col-4 text-center>
+            <ion-card class="ypBtns" no-margin>
+              <ion-icon name="ios-paper-outline" style="zoom:3.0;"></ion-icon>
+              <div class="ypTags">Resources</div>
+            </ion-card>
+          </ion-col> -->
+ 
+          <!-- <ion-col></ion-col> -->
+        
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+</ion-content>

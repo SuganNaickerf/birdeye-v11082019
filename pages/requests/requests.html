@@ -1,0 +1,408 @@
+
+<ion-header>
+  <ion-navbar color="light" hideBackButton>
+    <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Requests: {{this.requests.length}} Records Found</ion-title>
+    <ion-spinner hidden="{{!isPaused}}" name="bubbles" paused="{{isPaused}}"></ion-spinner>
+
+            <ion-buttons end>
+      <button color="dark" ion-button icon-only (click)="getRequests()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="homeBackground">
+ 
+  <ion-grid>
+    <!-- <ion-row>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row>
+      <ion-col no-padding></ion-col>    
+
+      <ion-col col-12 col-md-10 col-lg-6  no-padding>
+
+         <ion-card style="height: 100%; width: 100%" class="homeCard" no-margin>
+    
+          <!-- ALERT SEGMENT HEADER -->
+
+          <div class="farmSegment" padding>
+
+            <div text-center>
+              <h1 style="font-family: georgia; margin-top: 10px;  color: white" text-center>UNIT REQUESTS</h1>
+            </div>
+
+            <ion-segment mode="md" [(ngModel)]="alertDashboard" color="light">
+              <ion-segment-button value="open">
+                <!-- <ion-icon name="logo-dropbox"></ion-icon> -->
+                Open 
+                <ion-badge>{{this.requests.length}} </ion-badge>
+              </ion-segment-button>
+              <ion-segment-button value="accept">
+                Accepted
+                <ion-badge>{{this.myApp.acceptedCount}} </ion-badge>
+              </ion-segment-button>
+              <ion-segment-button value="reject">
+                Rejected
+                <ion-badge>{{this.myApp.rejectedCount}} </ion-badge>
+              </ion-segment-button>
+              <ion-segment-button value="investigate">
+                Investigate
+                <ion-badge>{{this.myApp.investigateCount}} </ion-badge>
+              </ion-segment-button>
+            </ion-segment>
+          </div>
+
+          <!-- ALERT SEGMENT CONTENT --> 
+          <div [ngSwitch]="alertDashboard">
+          <!-- <ion-scroll scrollX="true" scrollY="true" style="width: 100%; height: 480px" no-padding no-margin> -->
+            <!-- VIDEO SEGMENT -->
+            <div *ngSwitchCase="'open'">
+              <ion-grid no-padding no-margin>
+                <ion-row>
+                  <ion-col col-12>
+
+                  
+
+              <ng-container *ngFor="let request of requests" >
+              <ion-card mode="ios"  class="homeCard1" *ngIf="request.status === null"  no-padding>
+                <ion-card-header style="background-color: green; padding: 3px" (click)="goToAlertModal(request)" no-padding>
+                  <ion-grid style="color: white !important" no-padding no-margin>
+                    <ion-row no-padding no-margin>
+                      <ion-col col-3 col-md-4 col-xl-5 no-margin no-padding>
+                        <button style="color: white; font-size: 16px;" icon-start ion-button clear no-margin>
+                          <ion-icon name="ios-search"></ion-icon>
+                          <div >{{request.unit_name}}</div>
+                        </button>
+                        
+                        </ion-col>
+                      <ion-col  text-center  no-margin no-padding>
+                        <button style="color: lightgray" ion-button icon-start clear no-margin small>
+                          <ion-icon name="ios-thermometer-outline"></ion-icon>
+                          <div>{{request.temperature}}</div>
+                        </button>
+                      </ion-col>
+                      <ion-col text-center  no-margin no-padding>
+                        <button style="color: lightgray" ion-button icon-start clear no-margin small>
+                          <ion-icon name="ios-calculator"></ion-icon>
+                          <div>{{request.roundedMem}}%</div>
+                        </button>
+                      </ion-col>
+                      <ion-col  text-center  no-margin no-padding>
+                        <button style="color: lightgray" ion-button icon-start clear no-margin small>
+                          <ion-icon name="md-disc"></ion-icon>
+                          <div>{{request.discspace}}</div>
+                        </button>
+                      </ion-col>
+                      <ion-col text-center  no-margin no-padding>
+                        <button style="color: lightgray" ion-button icon-start clear no-margin small>
+                          <ion-icon name="ios-radio-outline"></ion-icon>
+                          <div>1 Gb</div>
+                        </button>
+                      </ion-col>
+
+                    </ion-row>
+                  </ion-grid>
+                </ion-card-header>
+                <ion-item-sliding no-lines>
+                  <ion-item no-lines>
+                    <!-- https://dev-x.co.za/wwwroot/Projects/PhoenixInstruments/BirdScanner/upload_pi/{{request.filename}} -->
+                    <ion-thumbnail item-start no-padding >
+          <img class="img-frame" src="https://www.dev-x.co.za/Projects/PhoenixInstruments/BirdScanner/upload_pi/{{request.filename}}"
+           onerror="this.src='https://5.imimg.com/data5/KB/DS/MY-69760/magnifying-glass-500x500.jpg';"/>
+                      
+                    </ion-thumbnail>
+                    <div style="font-size: 14.5px;">
+                      <!-- <ion-scroll mode="ios" scrollY="true" scrollX="true" style="height: 150px; max-width: 800px"> -->
+                    <!-- <h2 style="font-size: 16.5px; margin-bottom: 5px auto"><strong>{{request.unit_name}}</strong></h2> -->
+                    <ion-grid no-padding>
+                      <ion-row>
+                          <ion-col col-12  style="padding-right: 15px">
+                            <div><span class="subheader">Date:</span> {{request.hdatetime}}</div>
+                            <div><span class="subheader">Uploaded:</span> {{request.uploaded}}</div>
+                            <div><span class="subheader">Uploaded:</span> {{request.alertType}}</div>
+                            <div *ngIf="request.status === null"><span class="subheader" >Status:</span> Open </div>
+                            <div *ngIf="request.status !== null"><span class="subheader" >Status:</span> {{request.status}} </div>
+                          </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                
+                    </div>
+
+                  </ion-item>
+                  
+                  <ion-item-options side="right">  
+                      <button ion-button color="danger" (click)="deleteGoshala(goshala)">
+                        <ion-icon name="trash"></ion-icon>	
+                      </button>			
+                  </ion-item-options>
+                  
+                </ion-item-sliding>
+                
+              </ion-card>
+              </ng-container>
+              </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+
+
+            <!-- ACCEPTED ALERTS SEGMENT -->
+            <div *ngSwitchCase="'accept'">
+              <ng-container *ngFor="let request of requests">
+              <ion-card mode="ios"  class="homeCard1" *ngIf="request.status === 'Accepted'"  no-padding>
+                <ion-card-header style="background-color: green; padding: 3px" (click)="goToAlertModal(request)" no-padding>
+                  <ion-grid style="color: white !important" no-padding no-margin>
+                    <ion-row no-padding no-margin>
+                      <ion-col col-3 col-md-4 col-md-5 col-xl-5 no-margin no-padding>
+                        <button style="color: white; font-size: 16px;" icon-start ion-button clear no-margin>
+                          <ion-icon name="ios-search"></ion-icon>
+                          <div >{{request.unit_name}}</div>
+                        </button>
+                        
+                        </ion-col>
+                      <ion-col  text-center  no-margin no-padding>
+                        <button style="color: lightgray" ion-button icon-start clear no-margin small>
+                          <ion-icon name="ios-thermometer-outline"></ion-icon>
+                          <div>{{request.temperature}}</div>
+                        </button>
+                      </ion-col>
+                      <ion-col text-center  no-margin no-padding>
+                        <button style="color: lightgray" ion-button icon-start clear no-margin small>
+                          <ion-icon name="ios-calculator"></ion-icon>
+                          <div>{{request.roundedMem}}%</div>
+                        </button>
+                      </ion-col>
+                      <ion-col  text-center  no-margin no-padding>
+                        <button style="color: lightgray" ion-button icon-start clear no-margin small>
+                          <ion-icon name="md-disc"></ion-icon>
+                          <div>{{request.discspace}}</div>
+                        </button>
+                      </ion-col>
+                      <ion-col text-center  no-margin no-padding>
+                        <button style="color: lightgray" ion-button icon-start clear no-margin small>
+                          <ion-icon name="ios-radio-outline"></ion-icon>
+                          <div>1 Gb</div>
+                        </button>
+                      </ion-col>
+
+                    </ion-row>
+                  </ion-grid>
+                </ion-card-header>
+                <ion-item-sliding no-lines>
+                  <ion-item no-lines>
+                    
+                    <ion-thumbnail item-start no-padding >
+                      <img  src="https://5.imimg.com/data5/KB/DS/MY-69760/magnifying-glass-500x500.jpg"
+                      onerror="this.src='https://5.imimg.com/data5/KB/DS/MY-69760/magnifying-glass-500x500.jpg';"/>
+                      
+                    </ion-thumbnail>
+                    <div style="font-size: 14.5px;">
+                      <!-- <ion-scroll mode="ios" scrollY="true" scrollX="true" style="height: 150px; max-width: 800px"> -->
+                    <!-- <h2 style="font-size: 16.5px; margin-bottom: 5px auto"><strong>{{request.unit_name}}</strong></h2> -->
+                    <ion-grid no-padding>
+                      <ion-row>
+                          <ion-col col-12  style="padding-right: 15px">
+                            <div><span class="subheader">Date:</span> {{request.hdatetime}}</div>
+                            <div><span class="subheader">Uploaded:</span> {{request.uploaded}}</div>
+                            <div *ngIf="request.status === null"><span class="subheader" >Status:</span> Open </div>
+                            <div *ngIf="request.status !== null"><span class="subheader" >Status:</span> {{request.status}} </div>
+                            <div><span class="subheader" >Comment:</span> {{request.comments}} </div>
+                          </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                
+                    </div>
+
+                  </ion-item>
+                  
+                  <ion-item-options side="right">  
+                      <button ion-button color="danger" (click)="deleteGoshala(goshala)">
+                        <ion-icon name="trash"></ion-icon>	
+                      </button>			
+                  </ion-item-options>
+                  
+                </ion-item-sliding>
+                
+              </ion-card>
+              </ng-container>
+            </div>
+
+            <!-- REJECTED ALERT SEGMENT -->
+            <div *ngSwitchCase="'reject'">
+              <ng-container *ngFor="let request of requests"> 
+              <ion-card mode="ios"  class="homeCard1" *ngIf="request.status === 'Rejected'"  no-padding>
+                <ion-card-header style="background-color: green; padding: 3px" (click)="goToAlertModal(request)" no-padding>
+                  <ion-grid style="color: white !important" no-padding no-margin>
+                    <ion-row no-padding no-margin>
+                      <ion-col col-3 col-md-4 col-md-5 col-xl-5 no-margin no-padding>
+                        <button style="color: white; font-size: 16px;" icon-start ion-button clear no-margin>
+                          <ion-icon name="ios-search"></ion-icon>
+                          <div >{{request.unit_name}}</div>
+                        </button>
+                        
+                        </ion-col>
+                      <ion-col  text-center  no-margin no-padding>
+                        <button style="color: lightgray" ion-button icon-start clear no-margin small>
+                          <ion-icon name="ios-thermometer-outline"></ion-icon>
+                          <div>{{request.temperature}}</div>
+                        </button>
+                      </ion-col>
+                      <ion-col text-center  no-margin no-padding>
+                        <button style="color: lightgray" ion-button icon-start clear no-margin small>
+                          <ion-icon name="ios-calculator"></ion-icon>
+                          <div>{{request.roundedMem}}%</div>
+                        </button>
+                      </ion-col>
+                      <ion-col  text-center  no-margin no-padding>
+                        <button style="color: lightgray" ion-button icon-start clear no-margin small>
+                          <ion-icon name="md-disc"></ion-icon>
+                          <div>{{request.discspace}}</div>
+                        </button>
+                      </ion-col>
+                      <ion-col text-center  no-margin no-padding>
+                        <button style="color: lightgray" ion-button icon-start clear no-margin small>
+                          <ion-icon name="ios-radio-outline"></ion-icon>
+                          <div>1 Gb</div>
+                        </button>
+                      </ion-col>
+
+                    </ion-row>
+                  </ion-grid>
+                </ion-card-header>
+                <ion-item-sliding no-lines>
+                  <ion-item no-lines>
+                    
+                    <ion-thumbnail item-start no-padding >
+                      <img  src="https://5.imimg.com/data5/KB/DS/MY-69760/magnifying-glass-500x500.jpg"
+                      onerror="this.src='https://5.imimg.com/data5/KB/DS/MY-69760/magnifying-glass-500x500.jpg';"/>
+                      
+                    </ion-thumbnail>
+                    <div style="font-size: 14.5px;">
+                      <!-- <ion-scroll mode="ios" scrollY="true" scrollX="true" style="height: 150px; max-width: 800px"> -->
+                    <!-- <h2 style="font-size: 16.5px; margin-bottom: 5px auto"><strong>{{request.unit_name}}</strong></h2> -->
+                    <ion-grid no-padding>
+                      <ion-row>
+                          <ion-col col-12  style="padding-right: 15px">
+                            <div><span class="subheader">Date:</span> {{request.hdatetime}}</div>
+                            <div><span class="subheader">Uploaded:</span> {{request.uploaded}}</div>
+                            <div *ngIf="request.status === null"><span class="subheader" >Status:</span> Open </div>
+                            <div *ngIf="request.status !== null"><span class="subheader" >Status:</span> {{request.status}} </div>
+                            <div><span class="subheader" >Comment:</span> {{request.comments}} </div>
+                          </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                
+                    </div>
+
+                  </ion-item>
+                  
+                  <ion-item-options side="right">  
+                      <button ion-button color="danger" (click)="deleteGoshala(goshala)">
+                        <ion-icon name="trash"></ion-icon>	
+                      </button>			
+                  </ion-item-options>
+                  
+                </ion-item-sliding>
+                
+              </ion-card>
+              </ng-container>
+            </div>
+
+            <!-- INVESTIGATE ALERTS SEGMENT -->
+            <div *ngSwitchCase="'investigate'">
+              <ng-container *ngFor="let request of requests"> 
+              <ion-card mode="ios"  class="homeCard1" *ngIf="request.status === 'Investigate'"  no-padding>
+                <ion-card-header style="background-color: green; padding: 3px" (click)="goToAlertModal(request)" no-padding>
+                  <ion-grid style="color: white !important" no-padding no-margin>
+                    <ion-row no-padding no-margin>
+                      <ion-col col-3 col-md-4 col-md-5 col-xl-5 no-margin no-padding>
+                        <button style="color: white; font-size: 16px;" icon-start ion-button clear no-margin>
+                          <ion-icon name="ios-search"></ion-icon>
+                          <div >{{request.unit_name}}</div>
+                        </button>
+                        
+                        </ion-col>
+                      <ion-col  text-center  no-margin no-padding>
+                        <button style="color: lightgray" ion-button icon-start clear no-margin small>
+                          <ion-icon name="ios-thermometer-outline"></ion-icon>
+                          <div>{{request.temperature}}</div>
+                        </button>
+                      </ion-col>
+                      <ion-col text-center  no-margin no-padding>
+                        <button style="color: lightgray" ion-button icon-start clear no-margin small>
+                          <ion-icon name="ios-calculator"></ion-icon>
+                          <div>{{request.roundedMem}}%</div>
+                        </button>
+                      </ion-col>
+                      <ion-col  text-center  no-margin no-padding>
+                        <button style="color: lightgray" ion-button icon-start clear no-margin small>
+                          <ion-icon name="md-disc"></ion-icon>
+                          <div>{{request.discspace}}</div>
+                        </button>
+                      </ion-col>
+                      <ion-col text-center  no-margin no-padding>
+                        <button style="color: lightgray" ion-button icon-start clear no-margin small>
+                          <ion-icon name="ios-radio-outline"></ion-icon>
+                          <div>1 Gb</div>
+                        </button>
+                      </ion-col>
+
+                    </ion-row>
+                  </ion-grid>
+                </ion-card-header>
+                <ion-item-sliding no-lines>
+                  <ion-item no-lines>
+                    
+                    <ion-thumbnail item-start no-padding >
+                      <img  src="https://5.imimg.com/data5/KB/DS/MY-69760/magnifying-glass-500x500.jpg"
+                      onerror="this.src='https://5.imimg.com/data5/KB/DS/MY-69760/magnifying-glass-500x500.jpg';"/>
+                      
+                    </ion-thumbnail>
+                    <div style="font-size: 14.5px;">
+                      <!-- <ion-scroll mode="ios" scrollY="true" scrollX="true" style="height: 150px; max-width: 800px"> -->
+                    <!-- <h2 style="font-size: 16.5px; margin-bottom: 5px auto"><strong>{{request.unit_name}}</strong></h2> -->
+                    <ion-grid no-padding>
+                      <ion-row>
+                          <ion-col col-12  style="padding-right: 15px">
+                            <div><span class="subheader">Date:</span> {{request.hdatetime}}</div>
+                            <div><span class="subheader">Uploaded:</span> {{request.uploaded}}</div>
+                            <div *ngIf="request.status === null"><span class="subheader" >Status:</span> Open </div>
+                            <div *ngIf="request.status !== null"><span class="subheader" >Status:</span> {{request.status}} </div>
+                            <div><span class="subheader" >Comment:</span> {{request.comments}} </div>
+                          </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                
+                    </div>
+
+                  </ion-item>
+                  
+                  <ion-item-options side="right">  
+                      <button ion-button color="danger" (click)="deleteGoshala(goshala)">
+                        <ion-icon name="trash"></ion-icon>	
+                      </button>			
+                  </ion-item-options>
+                  
+                </ion-item-sliding>
+                
+              </ion-card>
+              </ng-container>
+            </div>
+          </div>
+          </ion-card>
+        </ion-col>
+        <ion-col no-padding></ion-col>
+      </ion-row>
+    </ion-grid>
+
+</ion-content>

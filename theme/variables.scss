@@ -1,0 +1,100 @@
+.item-md, .item-ios {
+background-color: transparentize($color: #ffffff, $amount: 1) !important;
+// margin-bottom: 5px;
+// color: black;
+}
+
+.homeBackground {
+
+// background-image: , url('https://www.prestigetoyota-ny.com/assets/misc/5669/600457.png');
+    background-image: linear-gradient(to bottom, rgba(13, 146, 84, 0.6) 15%,rgba(1, 61, 129, 0.6) 100%), url('https://www.outsidepursuits.com/wp-content/uploads/2018/01/Best-Birding-DSLR-Camera.jpg') ;
+
+// https://images.fineartamerica.com/images-medium-large-5/wild-daisies-in-the-grass-with-a-blue-sky-sandra-cunningham.jpg
+
+// https://png.pngtree.com/thumb_back/fw800/back_pic/04/30/94/935841826b3662b.jpg
+
+// https://previews.123rf.com/images/xuanhuongho/xuanhuongho1312/xuanhuongho131200029/24245761--people-herd-a-flock-of-oxen-cows-and-let-them-graze-grass-on-large-grassland-at-the-hill-in-lam-don.jpg
+
+// https://www.ricecreek.org/vertical/Sites/%7BF68A5205-A996-4208-96B5-2C7263C03AA9%7D/uploads/Grass_and_blue_sky.jpg
+
+    background-size: cover;
+    background-position: 30% 0%;
+
+  }
+
+  @media screen and (max-width: 600px) {
+  ion-tabs {
+    display: none;
+  }
+}
+
+  .farmSegment {
+    // background-color: rgb(143, 183, 40);
+    // background-color: rgb(132, 1, 165);
+    background-color: green;
+  }
+
+  .homeCard {
+    background:rgba(255,255,255, 0.5);
+    // font-family: "Arial";
+    // margin-bottom: 5px;
+  }
+
+    .homeCard1 {
+    background:rgba(253, 253, 253, 0.5);
+    // font-family: "Arial";
+    // flex-wrap: 20px;
+    // margin-bottom: 5px;
+  }
+
+  .goshalaBtn {
+    background-color: green;
+    // text-transform: capitalize;
+    color: white;
+  }
+
+  .goshalaBtn:hover {
+    background-color: rgb(47, 151, 47);
+    // text-transform: capitalize;
+    // color: black;
+  }
+
+
+  .main-view{
+    background: transparent;
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: .5;
+    background-color: rgb(203, 252, 221);
+  }
+  // .modal_content {
+  //   display: block;
+  //   position: relative;
+  //   top: calc(50% - (50%/2));
+  //   left: 0;
+  //   right: 0;
+  //   width: 100%;
+  //   height: 50%;
+  //   padding: 10px;
+  //   z-index: 1;
+  //   margin: 0 auto;
+  //   padding: 10px;
+  //   color: #333;
+  //   background: #e8e8e8;
+  //   background: -moz-linear-gradient(top, #fff 0%, #e8e8e8 100%);
+  //   background: -webkit-linear-gradient(top, #fff 0%, #e8e8e8 100%);
+  //   background: linear-gradient(to bottom, #fff 0%, #e8e8e8 100%);
+  //   border-radius: 5px;
+  //   box-shadow: 0 2px 3px rgba(51, 51, 51, .35);
+  //   box-sizing: border-box;
+  //   -moz-box-sizing: border-box;
+  //   -webkit-box-sizing: border-box;
+  //   //overflow: hidden;
+  // }
+

@@ -1,0 +1,11 @@
+<ion-tabs id="tabbar" [selectedIndex]="mySelectedIndex">
+  <ion-tab [root]="tab1Root" tabTitle="Dashboard" tabIcon="apps"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Alerts" tabIcon="ios-wifi" [tabBadge]=this.myApp.openCount></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="Monitors" tabIcon="ios-search" [tabBadge]=this.myApp.MonitorCount></ion-tab>
+  <ion-tab [root]="tab4Root" tabTitle="Requests" tabIcon="images"></ion-tab>
+  <ion-tab [root]="tab5Root" tabTitle="Maps" tabIcon="md-globe"></ion-tab>
+
+  <!--
+  <ion-tab [root]="tab6Root" tabTitle="Reports" tabIcon="clipboard"></ion-tab>
+  -->
+</ion-tabs>

@@ -1,0 +1,215 @@
+
+<ion-header>
+
+  <ion-navbar color="light">
+    <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Monitors: {{this.monitors.length}} Units Found</ion-title>
+      <!-- <div style="display: inline-block; width: 50%; padding-right: 20px"  float-right>
+      <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+      </div> -->
+
+    <!-- <ion-buttons end>
+      <button ion-button (click)="openGoshalamonitor()">
+        <ion-icon name="add"></ion-icon>   
+      </button>
+    </ion-buttons> -->
+
+        <ion-buttons end>
+      <button color="dark" ion-button icon-only (click)="refershMonitors()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="homeBackground">
+
+<ion-fab bottom right>
+    <button ion-fab mini color="dark" (click)="goToAddVehicle()"><ion-icon name="add"></ion-icon></button>
+</ion-fab>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col no-padding></ion-col>    
+      <ion-col col-12 col-md-6 col-xl-4 no-padding>
+
+  <!-- <ion-card *ngFor="let goshala of goshalas" (click)="goToGoshalaDetailPage(goshala)">
+    <ion-card-content>
+      <ion-card-title>{{goshala.Goshala_Name}}</ion-card-title>
+    </ion-card-content> 
+
+    <img [src]="goshala.Goshala_Image_Path"/>  
+  </ion-card> -->
+
+  <ion-card mode="ios"  class="homeCard1" *ngFor="let monitor of monitors" no-padding >
+
+    <!-- (click)="goToAlertModal(monitor)" -->
+
+    <ion-card-header style="background-color: green; padding: 3px"  no-padding (click)="goToAlertModal(monitor)">
+      <ion-grid style="color: white !important" no-padding no-margin>
+        <ion-row no-padding no-margin>
+          <ion-col col-3 col-md-4 col-md-5 col-xl-5 no-margin no-padding>
+            <button style="color: white; font-size: 16px;" icon-start ion-button clear no-margin>
+              <ion-icon name="ios-search"></ion-icon>
+              <div >{{monitor.unit_name}}</div>
+            </button>
+            
+            </ion-col>
+            
+            <!-- To link to DB Temperature, etc. not part of scope, just for display-->
+
+<!--           <ion-col text-center  no-margin no-padding>
+            <button style="color: lightgray" ion-button icon-start clear no-margin small>
+              <ion-icon name="ios-thermometer-outline"></ion-icon>
+              <div>30'C</div>
+            </button>
+          </ion-col>
+          <ion-col text-center  no-margin no-padding>
+            <button style="color: lightgray" ion-button icon-start clear no-margin small>
+              <ion-icon name="ios-calculator"></ion-icon>
+              <div>4 Gb</div>
+            </button>
+          </ion-col>
+          <ion-col  text-center  no-margin no-padding>
+            <button style="color: lightgray" ion-button icon-start clear no-margin small>
+              <ion-icon name="md-disc"></ion-icon>
+              <div>40 Gb</div>
+            </button>
+          </ion-col>
+          <ion-col text-center  no-margin no-padding>
+            <button style="color: lightgray" ion-button icon-start clear no-margin small>
+              <ion-icon name="ios-radio-outline"></ion-icon>
+              <div>1 Gb</div>
+            </button>
+          </ion-col> -->
+
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+    
+    <ion-item-sliding no-lines>
+      <ion-item style="padding-right: none !important" no-lines>
+        
+        <ion-thumbnail item-start no-padding >
+          <img class="img-frame" src="https://www.dev-x.co.za/Projects/PhoenixInstruments/BirdScanner/upload_pi/{{monitor.lastPicRequest}}"
+           onerror="this.src='https://5.imimg.com/data5/KB/DS/MY-69760/magnifying-glass-500x500.jpg';"/>
+          
+        </ion-thumbnail>
+        <!-- <ion-label> -->
+        <div style="font-size: 14.5px;">
+          <!-- <ion-scroll mode="ios" scrollY="true" scrollX="true" style="height: 150px; max-width: 800px"> -->
+        <div>
+        <!-- <h2 style="font-size: 16.5px; margin-bottom: 5px;"><strong>{{monitor.unit_name}}</strong> 
+        </h2> -->
+        <!-- <ion-toggle style="float: right" checked="true"></ion-toggle> -->
+        </div>
+        
+        <ion-grid no-padding>
+          <ion-row>
+             <ion-col col-12 col-lg-12 style="padding: 0 10px 0 10px">
+            <!--  <div><span class="subheader">CPU Serial No.:</span> {{monitor.cpuserial}}</div>
+              <div><span class="subheader">Client Name:</span> {{monitor.Client_Name}}</div>
+              
+              <!-- <ion-label>Sam</ion-label> -->
+              <ion-grid style="margin: 15px 0" no-margin no-padding>
+                <ion-row no-margin no-padding>
+    
+                  <ion-col col-4 text-center no-padding>
+                    <ion-card class="buttonList" (click)="activateCommand(monitor, 'Incident')" no-margin>
+                      <ion-icon style="zoom: 1.0" name="logo-youtube" no-margin icon-onlu></ion-icon>
+                      <div style="font-size: 12px" text-center>
+                        Video
+                      </div>
+                    </ion-card>
+                  </ion-col>
+    
+                  <ion-col col-4 text-center no-padding>
+                    <ion-card class="buttonList" (click)="activateCommand(monitor, 'Picture')" no-margin>
+                      <ion-icon style="zoom: 1.0" name="ios-images" no-margin icon-only></ion-icon>
+                      <div style="font-size: 12px" text-center>
+                        Picture
+                      </div>
+                    </ion-card>
+                  </ion-col>
+    
+                  <ion-col  col-4 text-center no-padding>
+                    <ion-card class="buttonList" (click)="activateCommand(monitor, 'Reboot')" no-margin>
+                      <ion-icon style="zoom: 1.0" name="md-power" no-margin icon-only></ion-icon>
+                      <div style="font-size: 12px" text-center>
+                        Reboot
+                      </div>
+                    </ion-card>
+                  </ion-col> 
+
+                  <!-- MOTION OFF CODE  -->
+                  <ion-col  col-4 text-center no-padding>
+                    <ion-card class="buttonList" no-margin>
+                      <ion-icon style="zoom: 1.0" name="{{getMonitorStatus(monitor,'MOTION')}}" no-margin icon-only></ion-icon>
+                      <div style="font-size: 12px" text-center>MOTION</div> 
+                    </ion-card>
+                  </ion-col>
+
+                  <!-- MOTION OFF CODE  -->
+                  <ion-col  col-4 text-center no-padding>
+                    <ion-card class="buttonList" no-margin>
+                      <ion-icon style="zoom: 1.0" name="{{getMonitorStatus(monitor,'IR')}}" no-margin icon-only></ion-icon>
+                      <div style="font-size: 12px" text-center>
+                        INFRARED
+                      </div> 
+                    </ion-card>
+                  </ion-col>
+
+                  <!-- MOTION OFF CODE  -->
+                  <ion-col  col-4 text-center no-padding>
+                    <ion-card class="buttonList" no-margin>
+                      <ion-icon style="zoom: 1.0" name="{{getMonitorStatus(monitor,'TRACK')}}" no-margin icon-only></ion-icon>
+                      <div style="font-size: 12px" text-center>
+                        TRACK
+                      </div> 
+                    </ion-card>
+                  </ion-col>                                    
+
+                </ion-row>
+              </ion-grid>
+            </ion-col>
+          </ion-row>
+         
+        </ion-grid>
+        
+        
+        <!-- </ion-scroll>   -->
+        </div>
+        
+
+        
+      </ion-item>
+      
+      <ion-item-options side="right">  
+	  			<button ion-button color="danger" (click)="deleteGoshala(goshala)">
+	  				<ion-icon name="trash"></ion-icon>	
+	  			</button>			
+	  	</ion-item-options>
+      
+    </ion-item-sliding>
+    
+  </ion-card>
+
+    <!-- <button ion-button color="dark" (click)="goToAddFarmPage()" block>Add Farm</button> -->
+
+
+
+
+      </ion-col>
+      <ion-col no-padding></ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
